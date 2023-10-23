@@ -1,9 +1,14 @@
-import RPi.GPIO as GPIO
-import dht11
+"""
+This is the main file to read the data from the sensor and display it on the 7 segment led panel.
+"""
+
 import time
+
+import adafruit_character_lcd.character_lcd_i2c as character_lcd
 import board
 import busio
-import adafruit_character_lcd.character_lcd_i2c as character_lcd
+import dht11
+import RPi.GPIO as GPIO
 
 # Definiere LCD Zeilen und Spaltenanzahl.
 lcd_columns = 16
@@ -16,25 +21,35 @@ i2c = busio.I2C(board.SCL, board.SDA)
 segment = Seg7x4(i2c, address=0x70)
 segment.fill(0)
 
-# Festlegen des LCDs in die Variable LCD
-# lcd = character_lcd.Character_LCD_I2C(i2c, lcd_columns, lcd_rows, 0x21)
 
-
-def lcd_print(output: str, output2: str):
+def led_print(output: list, data_type: str):
+    """
+    print the temperature and humidity
+    """
     try:
-        # Hintergrundbeleuchtung einschalten
-        lcd.backlight = True
+        if data_type == "temp":
+            segment[0] = str(output[0])
+            segment[1] = str(output[1])
+            segment.colon = True
+            segment[2] = str(output[3])
+            segment[3] = "C"
 
-        # Zwei Worte mit Zeilenumbruch werden ausgegeben
-        lcd.message = output + "\n" + output2
+        elif data_type == "humidity":
+            segment[0] = str(output[0])
+            segment[1] = str(output[1])
+            segment[2] = str(output[3])
+            segment[3] = "%"
+
+        segment.show()
 
     except KeyboardInterrupt:
-        # LCD ausschalten.
-        lcd.clear()
-        lcd.backlight = False
+        segment.fill(0)
 
 
 def main():
+    """
+    main function to read the data from the sensor
+    """
     # initialize GPIO
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
@@ -49,43 +64,15 @@ def main():
         while not result.is_valid():  # read until valid values
             result = instance.read()
 
-        lcd_print(
-            "Temp: %-3.1f C" % result.temperature, "Humidity: %-3.1f %%" % result.humidity
-        )
+        temp = result.temperature.split()
+        humidity = result.humidity.split()
 
-        time.sleep(10)
-        # Cursor anzeigen lassen.
-        lcd.clear()
+        led_print(temp, "temp")
+        time.sleep(5)
 
-# if __name__ == __main__:
-#     main()
-main()
-"""
-try:
-  while(True):
-    now = datetime.datetime.now()
-    hour = now.hour
-    minute = now.minute
-    second = now.second
+        led_print(humidity, "humidity")
+        time.sleep(5)
 
-    segment.fill(0)
 
-    # Anzeige für die Stunden.
-    segment[0] =  str(int(hour / 10))     # Zehnerzahlen
-    segment[1] =   str(hour % 10)         # Einerzahlen
-    # Anzeige für die Minuten.
-    segment[2] =   str(int(minute / 10))   # Zehnerzahlen
-    segment[3] =   str(minute % 10)        # Einerzahlen
-    #segment.colon = False
-
-    if second % 2  == 0:
-        segment.colon = True
-    else:
-        segment.colon = False
-
-    segment.show() # Wird benötigt um die Display LEDs zu updaten.
-
-    time.sleep(1) # Warte eine Sekunde
-except KeyboardInterrupt:
-
-    segment.fill(0) """
+if __name__ == "__main__":
+    main()
