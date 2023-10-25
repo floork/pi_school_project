@@ -51,7 +51,7 @@ def led_print(data: dict):
         for i in range(len(temperature_list)):
             output = temperature_list[i]
             segment[i] = output
-        segment[1].value = len(temperature_list) > 1  # Set the colon
+        # segment[1].value = len(temperature_list) > 1  # Set the colon
 
         time.sleep(10)
 
