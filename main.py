@@ -45,6 +45,8 @@ def get_data() -> dict:
 
 def led_print(data: dict):
     try:
+        segment.fill(0)
+
         temp = str(data.get("temp", 0))
         temperature_list = list(temp)
         print(data)
@@ -60,11 +62,18 @@ def led_print(data: dict):
         humidity = str(data.get("humidity", 0))
         humidity_list = list(humidity)
 
+        if data["humidity"] == 100:
+            segment[0] = "1"
+            segment[1] = "0"
+            segment[2] = "0"
+            time.sleep(10)
+            return
+
         segment[0] = humidity_list[0]
         segment[1] = humidity_list[1]
         segment[1] = "."
         segment[2] = "0"
-        segment[3] = "F"
+        segment[3] = "L"
         time.sleep(10)
 
     except KeyboardInterrupt:
