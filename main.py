@@ -22,30 +22,6 @@ segment = Seg7x4(i2c, address=0x70)
 segment.fill(0)
 
 
-def led_print(data: dict):
-    """
-    print the temperature and humidity
-    """
-    try:
-        if data_type == "temp":
-            segment[0] = str(output[0])
-            segment[1] = str(output[1])
-            segment.colon = True
-            segment[2] = str(output[3])
-            segment[3] = "C"
-
-        elif data_type == "humidity":
-            segment[0] = str(output[0])
-            segment[1] = str(output[1])
-            segment[2] = str(output[3])
-            segment[3] = "%"
-
-        segment.show()
-
-    except KeyboardInterrupt:
-        segment.fill(0)
-
-
 def init_gpio():
     """
     initialize GPIO
@@ -67,6 +43,35 @@ def get_data() -> dict:
     return {"temp": result.temperature, "humidity": result.humidity}
 
 
+def led_print(data: dict):
+    """
+    print the temperature and humidity
+    """
+    try:
+        for i in data["temp"]:
+            output = str(data["temp"][i])
+            segment[i] = output
+            if i == 1:
+                segment.colon = True
+        segment[3] = "C"
+
+        segment.show()
+
+        time.sleep(10)
+
+        for i in data["humidity"]:
+            output = str(data["humidity"][i])
+            segment[i] = output
+        segment[3] = "%"
+
+        segment.show()
+
+        time.sleep(10)
+
+    except KeyboardInterrupt:
+        segment.fill(0)
+
+
 def main():
     """
     main function to read the data from the sensor
@@ -77,8 +82,6 @@ def main():
         data = get_data()
 
         led_print(data)
-
-        time.sleep(20)
 
 
 if __name__ == "__main__":
