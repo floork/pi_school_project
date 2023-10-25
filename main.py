@@ -56,7 +56,7 @@ def led_print(data: dict):
         segment[2] = temperature_list[3]
         segment[3] = "C"
 
-        # time.sleep(10)
+        time.sleep(10)
 
         segment.fill(0)
         humidity = str(data.get("humidity", 0))
@@ -74,7 +74,7 @@ def led_print(data: dict):
         segment[1] = "."
         segment[2] = "0"
         segment[3] = "L"
-        # time.sleep(10)
+        time.sleep(10)
 
     except KeyboardInterrupt:
         segment.fill(0)
@@ -86,8 +86,7 @@ def main():
     """
     init_gpio()
 
-    # for _ in range(30):
-    while True:
+    for _ in range(30):
         data = get_data()
 
         led_print(data)
