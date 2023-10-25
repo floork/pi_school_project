@@ -50,9 +50,13 @@ def led_print(data: dict):
         print(data)
         for i in range(len(temperature_list)):
             output = temperature_list[i]
-            segment[i] = output
             if output == ".":
-                segment[i - 1] = str(temperature_list[i - 1] + ".")
+                pass
+            if i == 1:
+                segment[i] = output + "."
+            else:
+                segment[i] = output
+
         segment[3] = "C"
 
         time.sleep(10)
