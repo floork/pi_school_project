@@ -7,5 +7,5 @@
   - [ ] messabweichungen
 - [ ] struktogramm/pap
   - [ ] use 7 segment led
-- [ ] python script
-  - [ ] use 7 segment led panel
+- [x] python script
+  - [x] use 7 segment led panel
