@@ -48,10 +48,9 @@ def led_print(data: dict):
         temp = str(data.get("temp", 0))
         temperature_list = list(temp)
         print(data)
-        temperature_list.pop(2)
-        for i in range(len(temperature_list)):
-            output = temperature_list[i]
-            segment[i] = output
+        segment[0] = temperature_list[0]
+        segment[1] = temperature_list[1]
+        segment[2] = temperature_list[3]
         segment[3] = "C"
 
         time.sleep(10)
