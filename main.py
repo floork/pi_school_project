@@ -62,8 +62,9 @@ def led_print(data: dict):
 
         segment[0] = humidity_list[0]
         segment[1] = humidity_list[1]
-        segment[2] = "P"
-        segment[3] = "e"
+        segment[1] = "."
+        segment[2] = "0"
+        segment[3] = "H"
 
         time.sleep(10)
 
