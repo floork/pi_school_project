@@ -52,7 +52,7 @@ def led_print(data: dict):
             output = temperature_list[i]
             segment[i] = output
             if output == ".":
-                segment[i-1] = str(temperature_list[i-1] + .)
+                segment[i - 1] = str(temperature_list[i - 1] + ".")
         segment[3] = "C"
 
         time.sleep(10)
@@ -67,7 +67,7 @@ def led_print(data: dict):
         time.sleep(10)
 
     except KeyboardInterrupt:
-        segment.off()
+        segment.fill()
 
 
 def main():
