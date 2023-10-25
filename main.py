@@ -1,113 +1,85 @@
-import RPi.GPIO as GPIO
-
-import dht11
+"""
+This is the main file to read the data from the sensor and display it on the 7 segment led panel.
+"""
 
 import time
 
-import board
-
-import busio
-
 import adafruit_character_lcd.character_lcd_i2c as character_lcd
-
-
+import board
+import busio
+import dht11
+import RPi.GPIO as GPIO
 
 # Definiere LCD Zeilen und Spaltenanzahl.
-
 lcd_columns = 16
-
 lcd_rows = 2
 
-
-
 # Initialisierung I2C Bus
-
 i2c = busio.I2C(board.SCL, board.SDA)
 
+# 7 segment led panel
+segment = Seg7x4(i2c, address=0x70)
+segment.fill(0)
 
 
-# Festlegen des LCDs in die Variable LCD
-
-lcd = character_lcd.Character_LCD_I2C(i2c, lcd_columns, lcd_rows, 0x21)
-
-
-
-
-
-def lcd_print(output: str, output2: str):
-
+def led_print(data: dict):
+    """
+    print the temperature and humidity
+    """
     try:
+        if data_type == "temp":
+            segment[0] = str(output[0])
+            segment[1] = str(output[1])
+            segment.colon = True
+            segment[2] = str(output[3])
+            segment[3] = "C"
 
-        # Hintergrundbeleuchtung einschalten
+        elif data_type == "humidity":
+            segment[0] = str(output[0])
+            segment[1] = str(output[1])
+            segment[2] = str(output[3])
+            segment[3] = "%"
 
-        lcd.backlight = True
-
-
-
-        # Zwei Worte mit Zeilenumbruch werden ausgegeben
-
-        lcd.message = output + "\n" + output2
-
-
-
-        time.sleep(10)
-
-        # Cursor anzeigen lassen.
-
-        lcd.clear()
-
-
+        segment.show()
 
     except KeyboardInterrupt:
-
-        # LCD ausschalten.
-
-        lcd.clear()
-
-        lcd.backlight = False
+        segment.fill(0)
 
 
-
-
-
-def main():
-
-    # initialize GPIO
-
+def init_gpio():
+    """
+    initialize GPIO
+    """
     GPIO.setwarnings(False)
-
     GPIO.setmode(GPIO.BCM)
-
     GPIO.cleanup()
 
 
-
-    # read data using pin 14
-
+def get_data() -> dict:
+    """
+    read the data from the sensor
+    """
     instance = dht11.DHT11(pin=4)
-
     result = instance.read()
-
-
-
-    while not result.is_valid():  # read until valid values
-
+    while not result.is_valid():
         result = instance.read()
 
+    return {"temp": result.temperature, "humidity": result.humidity}
 
 
-    for i in range(9):
+def main():
+    """
+    main function to read the data from the sensor
+    """
+    init_gpio()
 
-        lcd_print(
+    for _ in range(30):
+        data = get_data()
 
-            "Temp: %-3.1f C" % result.temperature, "Humidity: %-3.1f %%" % result.humidity
+        led_print(data)
 
-        )
+        time.sleep(20)
 
 
-
-#if __name__ == __main__:
-#
-#    main()
-main()
-
+if __name__ == "__main__":
+    main()
