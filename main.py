@@ -51,6 +51,9 @@ def led_print(data: dict):
         for i in range(len(temperature_list)):
             output = temperature_list[i]
             segment[i] = output
+            if output == ".":
+                segment[i-1] = str(temperature_list[i-1] + .)
+        segment[3] = "C"
 
         time.sleep(10)
 
