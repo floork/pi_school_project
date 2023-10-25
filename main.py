@@ -64,8 +64,7 @@ def led_print(data: dict):
         segment[1] = humidity_list[1]
         segment[1] = "."
         segment[2] = "0"
-        segment[3] = "H"
-
+        segment[3] = "F"
         time.sleep(10)
 
     except KeyboardInterrupt:
