@@ -22,7 +22,7 @@ segment = Seg7x4(i2c, address=0x70)
 segment.fill(0)
 
 
-def led_print(output: list, data_type: str):
+def led_print(data: dict):
     """
     print the temperature and humidity
     """
@@ -46,32 +46,39 @@ def led_print(output: list, data_type: str):
         segment.fill(0)
 
 
-def main():
+def init_gpio():
     """
-    main function to read the data from the sensor
+    initialize GPIO
     """
-    # initialize GPIO
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
     GPIO.cleanup()
 
-    # read data using pin 14
-    instance = dht11.DHT11(pin=4)
 
-    for _ in range(30):
+def get_data() -> dict:
+    """
+    read the data from the sensor
+    """
+    instance = dht11.DHT11(pin=4)
+    result = instance.read()
+    while not result.is_valid():
         result = instance.read()
 
-        while not result.is_valid():  # read until valid values
-            result = instance.read()
+    return {"temp": result.temperature, "humidity": result.humidity}
 
-        temp = result.temperature.split()
-        humidity = result.humidity.split()
 
-        led_print(temp, "temp")
-        time.sleep(5)
+def main():
+    """
+    main function to read the data from the sensor
+    """
+    init_gpio()
 
-        led_print(humidity, "humidity")
-        time.sleep(5)
+    for _ in range(30):
+        data = get_data()
+
+        led_print(data)
+
+        time.sleep(20)
 
 
 if __name__ == "__main__":
