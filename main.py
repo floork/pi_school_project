@@ -44,36 +44,35 @@ def get_data() -> dict:
 
 
 def led_print(data: dict):
-    """
-    print the temperature and humidity
-    """
     try:
-        temp = data["temp"]
-        temperature_list = temp.split()
-        for i in temperature_list:
-            output = temperature_list[i]
-            segment[i] = output
-            if i == 1:
-                segment.colon = True
-        segment[3] = "C"
+        temp = str(data.get("temp", 0))
+        temperature_list = list(temp)
 
-        segment.show()
+        for i in range(len(temperature_list)):
+            output = temperature_list[i]
+            # Update the corresponding LED segment for 'output'
+            if i < 4:
+                segment[i].value = (
+                    output == "1"
+                )  # Assuming 'output' is '1' for displaying that segment
+
+        segment[1].value = len(temperature_list) > 1  # Set the colon
 
         time.sleep(10)
 
-        humidity = data["humidity"]
-        humidity_list = humidity.split()
-        for i in humidity_list:
-            output = humidity_list[i]
-            segment[i] = output
-        segment[3] = "%"
+        humidity = str(data.get("humidity", 0))
+        humidity_list = list(humidity)
 
-        segment.show()
+        for i in range(len(humidity_list)):
+            output = humidity_list[i]
+            # Update the corresponding LED segment for 'output'
+            if i < 4:
+                segment[i].value = output == "1"
 
         time.sleep(10)
 
     except KeyboardInterrupt:
-        segment.fill(0)
+        segment.off()
 
 
 def main():
