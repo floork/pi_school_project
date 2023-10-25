@@ -56,6 +56,7 @@ def led_print(data: dict):
 
         time.sleep(10)
 
+        segment.fill()
         humidity = str(data.get("humidity", 0))
         humidity_list = list(humidity)
 
