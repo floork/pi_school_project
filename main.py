@@ -49,7 +49,7 @@ def led_print(data: dict):
         temperature_list = list(temp)
         print(data)
         segment[0] = temperature_list[0]
-        segment[1] = temperature_list[1]
+        segment[1] = temperature_list[1] + "."
         segment[2] = temperature_list[3]
         segment[3] = "C"
 
@@ -58,9 +58,10 @@ def led_print(data: dict):
         humidity = str(data.get("humidity", 0))
         humidity_list = list(humidity)
 
-        for i in range(len(humidity_list)):
-            output = humidity_list[i]
-            segment[i] = output
+        segment[0] = humidity_list[0]
+        segment[1] = humidity_list[1]
+        segment[2] = "%"
+        segment[3] = " "
 
         time.sleep(10)
 
