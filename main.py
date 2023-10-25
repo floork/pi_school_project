@@ -4,11 +4,11 @@ This is the main file to read the data from the sensor and display it on the 7 s
 
 import time
 
-import adafruit_character_lcd.character_lcd_i2c as character_lcd
 import board
 import busio
 import dht11
 import RPi.GPIO as GPIO
+from adafruit_ht16k33.segments import Seg7x4
 
 # Definiere LCD Zeilen und Spaltenanzahl.
 lcd_columns = 16
