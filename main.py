@@ -50,12 +50,7 @@ def led_print(data: dict):
 
         for i in range(len(temperature_list)):
             output = temperature_list[i]
-            # Update the corresponding LED segment for 'output'
-            if i < 4:
-                segment[i].value = (
-                    output == "1"
-                )  # Assuming 'output' is '1' for displaying that segment
-
+            segment[i] = output
         segment[1].value = len(temperature_list) > 1  # Set the colon
 
         time.sleep(10)
@@ -65,9 +60,7 @@ def led_print(data: dict):
 
         for i in range(len(humidity_list)):
             output = humidity_list[i]
-            # Update the corresponding LED segment for 'output'
-            if i < 4:
-                segment[i].value = output == "1"
+            segment[i] = output
 
         time.sleep(10)
 
