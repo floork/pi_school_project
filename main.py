@@ -86,7 +86,7 @@ def main():
     """
     init_gpio()
 
-    for _ in range(30):
+    while True:
         data = get_data()
 
         led_print(data)
