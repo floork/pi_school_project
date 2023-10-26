@@ -1,0 +1,63 @@
+Gewächshaussteuerungsprojekt - Dokumentation
+Projektname: Gewächshaussteuerung mit Raspberry Pi 4 Model B
+Projektbeschreibung:
+
+Das Gewächshaussteuerungsprojekt zielt darauf ab, die Luftfeuchtigkeit in einem Gewächshaus mit Hilfe eines Raspberry Pi 4 Model B und einem DHT11 Luftfeuchtigkeitssensor zu überwachen und sie auf einem Sieben-Segment-Display anzuzeigen. Dieses Projekt soll dazu beitragen, die Umgebungsbedingungen im Gewächshaus zu optimieren und das Pflanzenwachstum zu fördern.
+Projektkomponenten:
+
+    Raspberry Pi 4 Model B
+    DHT11 Luftfeuchtigkeitssensor
+    Sieben-Segment-Display
+    Verkabelung und Steckbrett
+    Python-Programm zur Datenerfassung und Anzeige
+
+Schritte zur Implementierung:
+
+    Hardware-Zusammenstellung:
+        Schließe den DHT11-Sensor und das Sieben-Segment-Display an den Raspberry Pi 4 Model B an. Stelle sicher, dass die Verkabelung korrekt ist.
+
+    Software-Setup:
+        Installiere das benötigte Betriebssystem auf dem Raspberry Pi (z.B. Raspbian).
+        Installiere die erforderlichen Python-Bibliotheken, wie Adafruit DHT und RPi.GPIO.
+
+    Programmierung:
+        Schreibe ein Python-Programm, das den DHT11-Sensor ausliest, die Luftfeuchtigkeitsdaten erfasst und sie auf dem Sieben-Segment-Display anzeigt. Du benötigst eine Bibliothek zur Ansteuerung des Sieben-Segment-Displays (z.B. gpiozero).
+
+    Testen und Kalibrieren:
+        Führe Tests durch, um sicherzustellen, dass der Sensor korrekte Daten liefert.
+        Kalibriere gegebenenfalls den Sensor, um genaue Werte sicherzustellen.
+
+    Gewächshauseinbau:
+        Platziere den Raspberry Pi 4 Model B und die Sensoren im Gewächshaus und stelle sicher, dass die Verkabelung ordnungsgemäß gesichert ist.
+
+    Datenvisualisierung:
+        Implementiere die Möglichkeit, die Daten aus der Ferne zu überwachen, zum Beispiel über eine Webanwendung oder eine mobile App.
+
+    Dokumentation:
+        Dokumentiere den gesamten Implementierungsprozess, die Code-Struktur und die Schaltpläne.
+
+Ergebnisse und Schlussfolgerungen:
+
+Nach Abschluss des Projekts sollte die Gewächshaussteuerung in der Lage sein, die Luftfeuchtigkeit im Gewächshaus zu überwachen und auf dem Sieben-Segment-Display anzuzeigen. Dies trägt zur besseren Kontrolle und Pflege der Pflanzen bei und ermöglicht es, die optimalen Wachstumsbedingungen aufrechtzuerhalten.
+Herausforderungen und Verbesserungen:
+
+Während des Projekts wurden folgende Herausforderungen identifiziert:
+
+    [Herausforderung 1]
+    [Herausforderung 2]
+    ...
+
+Mögliche Verbesserungen und zukünftige Entwicklungen des Projekts könnten beinhalten:
+
+    Implementierung einer automatischen Bewässerungsfunktion basierend auf den gemessenen Daten.
+    Integration einer Benutzeroberfläche für die Fernüberwachung.
+
+Fazit:
+
+Die Gewächshaussteuerung mit einem Raspberry Pi 4 Model B und einer Sieben-Segment-Anzeige stellt einen wichtigen Schritt zur Automatisierung und Verbesserung der Pflanzenpflege in Gewächshäusern dar. Das Projekt hat das Potenzial, die Ernteerträge und die Pflanzengesundheit zu steigern.
+Autor:
+
+[Dein Name]
+[Deine Kontaktdaten]
+
+Passe die [Herausforderung 1], [Herausforderung 2] und [Dein Name] entsprechend deinem Projekt an.
