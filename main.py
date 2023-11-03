@@ -24,7 +24,7 @@ segment.fill(0)
 
 def init_gpio():
     """
-    initialize GPIO
+    initialisierung der GPIO Pins
     """
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
@@ -33,7 +33,7 @@ def init_gpio():
 
 def get_data() -> dict:
     """
-    read the data from the sensor
+    Daten aus Sensor auslesen und als dictionary zurückgeben
     """
     instance = dht11.DHT11(pin=4)
     result = instance.read()
@@ -44,6 +44,9 @@ def get_data() -> dict:
 
 
 def led_print(data: dict):
+    """
+    Daten auf LED Panel ausgeben
+    """
     try:
         segment.fill(0)
 
@@ -82,7 +85,7 @@ def led_print(data: dict):
 
 def main():
     """
-    main function to read the data from the sensor
+    Main Funktion des Programms
     """
     init_gpio()
 
