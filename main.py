@@ -128,7 +128,7 @@ def print_matrix(light: str) -> None:
 
     # Joy-IT in der Matrix anzeigen
     # msg = "Joy-IT" + " "
-    msg = light
+    msg = str(light)
     # Ausgegebenen Text in der Konsole Anzeigen
     print("[-] Printing: %s" % msg)
     show_message(
