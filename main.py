@@ -4,6 +4,7 @@ This is the main file to read the data from the sensor and display it on the 7 s
 
 import time
 
+import adafruit_character_lcd.character_lcd_i2c as character_lcd
 import board
 import busio
 import dht11
@@ -16,6 +17,10 @@ lcd_rows = 2
 
 # Initialisierung I2C Bus
 i2c = busio.I2C(board.SCL, board.SDA)
+
+# Festlegen des LCDs in die Variable LCD
+
+lcd = character_lcd.Character_LCD_I2C(i2c, lcd_columns, lcd_rows, 0x21)
 
 # 7 segment led panel
 segment = Seg7x4(i2c, address=0x70)
