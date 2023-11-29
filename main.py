@@ -121,7 +121,7 @@ def led_print(data: dict):
     segment[2] = temperature_list[3]
     segment[3] = "C"
 
-    time.sleep(10)
+    # time.sleep(10)
 
     segment.fill(0)
     humidity = str(data.get("humidity", 0))
@@ -131,7 +131,7 @@ def led_print(data: dict):
         segment[0] = "1"
         segment[1] = "0"
         segment[2] = "0"
-        time.sleep(10)
+        # time.sleep(10)
         return
 
     segment[0] = humidity_list[0]
@@ -139,7 +139,7 @@ def led_print(data: dict):
     segment[1] = "."
     segment[2] = "0"
     segment[3] = "L"
-    time.sleep(10)
+    # time.sleep(10)
 
 
 def main():
