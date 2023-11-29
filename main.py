@@ -108,10 +108,13 @@ def get_data() -> dict:
     }
 
 
-def print_matrix(light: str, cascaded, block_orientation, rotate) -> None:
+def print_matrix(light: str) -> None:
     """
     Daten auf LED Panel ausgeben
     """
+    cascaded = 1
+    block_orientation = 90
+    rotate = 0
     # Matrix Gerät festlegen und erstellen.
     serial = spi(port=0, device=1, gpio=noop())
     device = max7219(
@@ -188,7 +191,7 @@ def main():
             data = get_data()
 
             lcd_print(f"temp: {data['temp']}", f"humidity: {data['humidity']}")
-            print_matrix(data["light"], cascaded=1, block_orientation=90, rotate=0)
+            print_matrix(data["light"])
             led_print(data)
         except KeyboardInterrupt:
             # LCD ausschalten.
