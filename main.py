@@ -115,8 +115,6 @@ def main():
 
             segment.fill(0)
 
-            GPIO.cleanup()
-
 
 if __name__ == "__main__":
     main()
