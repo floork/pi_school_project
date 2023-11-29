@@ -43,6 +43,30 @@ def get_data() -> dict:
     return {"temp": result.temperature, "humidity": result.humidity}
 
 
+def lcd_print(output: str, output2: str):
+    try:
+        # Hintergrundbeleuchtung einschalten
+
+        lcd.backlight = True
+
+        # Zwei Worte mit Zeilenumbruch werden ausgegeben
+
+        lcd.message = output + "\n" + output2
+
+        time.sleep(10)
+
+        # Cursor anzeigen lassen.
+
+        lcd.clear()
+
+    except KeyboardInterrupt:
+        # LCD ausschalten.
+
+        lcd.clear()
+
+        lcd.backlight = False
+
+
 def led_print(data: dict):
     """
     Daten auf LED Panel ausgeben
@@ -93,6 +117,7 @@ def main():
         data = get_data()
 
         led_print(data)
+        lcd_print(f"temp: {data['temp']}", f"humidity: {data['humidity']}")
 
 
 if __name__ == "__main__":
