@@ -124,12 +124,14 @@ def print_matrix(light: str) -> None:
         rotate=rotate or 0,
     )
     # Matrix Initialisierung in der Konsole anzeigen
-    # print("[-] Matrix initialized")
+    print("[-] Matrix initialized")
 
     # Joy-IT in der Matrix anzeigen
+    msg = "Joy-IT" + " " + light
     # Ausgegebenen Text in der Konsole Anzeigen
+    print("[-] Printing: %s" % msg)
     show_message(
-        device, light, fill="white", font=proportional(CP437_FONT), scroll_delay=0.1
+        device, msg, fill="white", font=proportional(CP437_FONT), scroll_delay=0.1
     )
 
 
