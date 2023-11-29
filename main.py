@@ -108,7 +108,9 @@ def get_data() -> dict:
     }
 
 
-def print_matrix(light: str) -> None:
+def print_matrix(
+    light: str, cascaded: int, block_orientation: int, rotate: int
+) -> None:
     """
     Daten auf LED Panel ausgeben
     """
@@ -188,7 +190,7 @@ def main():
             data = get_data()
 
             lcd_print(f"temp: {data['temp']}", f"humidity: {data['humidity']}")
-            print_matrix(data["light"])
+            print_matrix(data["light"], cascaded=1, block_orientation=90, rotate=0)
             led_print(data)
         except KeyboardInterrupt:
             # LCD ausschalten.
