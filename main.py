@@ -104,7 +104,7 @@ def get_data() -> dict:
     return {
         "temp": result.temperature,
         "humidity": result.humidity,
-        "light": light_sensor.readLight(),
+        "light": round(light_sensor.readLight(), 2),
     }
 
 
@@ -127,8 +127,7 @@ def print_matrix(light: str) -> None:
     # print("[-] Matrix initialized")
 
     # Joy-IT in der Matrix anzeigen
-    rounded = round(float(light), 2)
-    msg = f"{str(rounded)} lux"
+    msg = f"{str(light)} lux"
     # Ausgegebenen Text in der Konsole Anzeigen
     print("[-] Printing: %s" % msg)
     show_message(
