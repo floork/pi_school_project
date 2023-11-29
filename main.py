@@ -49,63 +49,51 @@ def get_data() -> dict:
 
 
 def lcd_print(output: str, output2: str):
-    try:
-        # Hintergrundbeleuchtung einschalten
+    # Hintergrundbeleuchtung einschalten
 
-        lcd.backlight = True
+    lcd.backlight = True
 
-        # Zwei Worte mit Zeilenumbruch werden ausgegeben
-        lcd.clear()
-        lcd.message = output + "\n" + output2
+    # Zwei Worte mit Zeilenumbruch werden ausgegeben
+    lcd.clear()
+    lcd.message = output + "\n" + output2
 
-        # Cursor anzeigen lassen.
-
-    except KeyboardInterrupt:
-        # LCD ausschalten.
-
-        lcd.clear()
-
-        lcd.backlight = False
+    # Cursor anzeigen lassen.
 
 
 def led_print(data: dict):
     """
     Daten auf LED Panel ausgeben
     """
-    try:
-        segment.fill(0)
+    segment.fill(0)
 
-        temp = str(data.get("temp", 0))
-        temperature_list = list(temp)
-        print(data)
-        segment[0] = temperature_list[0]
-        segment[1] = temperature_list[1]
-        segment[1] = "."
-        segment[2] = temperature_list[3]
-        segment[3] = "C"
+    temp = str(data.get("temp", 0))
+    temperature_list = list(temp)
+    print(data)
+    segment[0] = temperature_list[0]
+    segment[1] = temperature_list[1]
+    segment[1] = "."
+    segment[2] = temperature_list[3]
+    segment[3] = "C"
 
-        time.sleep(10)
+    time.sleep(10)
 
-        segment.fill(0)
-        humidity = str(data.get("humidity", 0))
-        humidity_list = list(humidity)
+    segment.fill(0)
+    humidity = str(data.get("humidity", 0))
+    humidity_list = list(humidity)
 
-        if data["humidity"] == 100:
-            segment[0] = "1"
-            segment[1] = "0"
-            segment[2] = "0"
-            time.sleep(10)
-            return
-
-        segment[0] = humidity_list[0]
-        segment[1] = humidity_list[1]
-        segment[1] = "."
+    if data["humidity"] == 100:
+        segment[0] = "1"
+        segment[1] = "0"
         segment[2] = "0"
-        segment[3] = "L"
         time.sleep(10)
+        return
 
-    except KeyboardInterrupt:
-        segment.fill(0)
+    segment[0] = humidity_list[0]
+    segment[1] = humidity_list[1]
+    segment[1] = "."
+    segment[2] = "0"
+    segment[3] = "L"
+    time.sleep(10)
 
 
 def main():
@@ -115,10 +103,20 @@ def main():
     init_gpio()
 
     while True:
-        data = get_data()
+        try:
+            data = get_data()
 
-        lcd_print(f"temp: {data['temp']}", f"humidity: {data['humidity']}")
-        led_print(data)
+            lcd_print(f"temp: {data['temp']}", f"humidity: {data['humidity']}")
+            # led_print(data)
+        except KeyboardInterrupt:
+            # LCD ausschalten.
+
+            lcd.clear()
+            lcd.backlight = False
+
+            segment.fill(0)
+
+            GPIO.cleanup()
 
 
 if __name__ == "__main__":
