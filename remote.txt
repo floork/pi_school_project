@@ -10,9 +10,6 @@ PW: adminadmin
 # Author's Git: https://bitbucket.org/MattHawkinsUK/
 # Author's website: https://www.raspberrypi-spy.co.uk
 
-import RPi.GPIO as GPIO
-import smbus
-import time
 
 if(GPIO.RPI_REVISION == 1):
     bus = smbus.SMBus(0)

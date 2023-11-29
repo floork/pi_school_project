@@ -2,6 +2,7 @@
 This is the main file to read the data from the sensor and display it on the 7 segment led panel.
 """
 
+import re
 import time
 
 import adafruit_character_lcd.character_lcd_i2c as character_lcd
@@ -11,6 +12,18 @@ import dht11
 import RPi.GPIO as GPIO
 import smbus
 from adafruit_ht16k33.segments import Seg7x4
+from luma.core.interface.serial import noop, spi
+from luma.core.legacy import show_message, text
+from luma.core.legacy.font import (
+    CP437_FONT,
+    LCD_FONT,
+    SINCLAIR_FONT,
+    TINY_FONT,
+    proportional,
+)
+from luma.core.render import canvas
+from luma.core.virtual import viewport
+from luma.led_matrix.device import max7219
 
 # Definiere LCD Zeilen und Spaltenanzahl.
 lcd_columns = 16
@@ -95,6 +108,28 @@ def get_data() -> dict:
     }
 
 
+def print_matrix(light: str) -> None:
+    """
+    Daten auf LED Panel ausgeben
+    """
+    # Matrix Gerät festlegen und erstellen.
+    serial = spi(port=0, device=1, gpio=noop())
+    device = max7219(
+        serial,
+        cascaded=cascaded or 1,
+        block_orientation=block_orientation,
+        rotate=rotate or 0,
+    )
+    # Matrix Initialisierung in der Konsole anzeigen
+    # print("[-] Matrix initialized")
+
+    # Joy-IT in der Matrix anzeigen
+    # Ausgegebenen Text in der Konsole Anzeigen
+    show_message(
+        device, light, fill="white", font=proportional(CP437_FONT), scroll_delay=0.1
+    )
+
+
 def lcd_print(output: str, output2: str):
     # Hintergrundbeleuchtung einschalten
 
@@ -121,7 +156,7 @@ def led_print(data: dict):
     segment[2] = temperature_list[3]
     segment[3] = "C"
 
-    # time.sleep(10)
+    time.sleep(10)
 
     segment.fill(0)
     humidity = str(data.get("humidity", 0))
@@ -131,7 +166,7 @@ def led_print(data: dict):
         segment[0] = "1"
         segment[1] = "0"
         segment[2] = "0"
-        # time.sleep(10)
+        time.sleep(10)
         return
 
     segment[0] = humidity_list[0]
@@ -139,7 +174,7 @@ def led_print(data: dict):
     segment[1] = "."
     segment[2] = "0"
     segment[3] = "L"
-    # time.sleep(10)
+    time.sleep(10)
 
 
 def main():
