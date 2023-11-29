@@ -129,12 +129,10 @@ def print_matrix(light: str) -> None:
     # Joy-IT in der Matrix anzeigen
     flight = float(light)
     msg = ""
-    if flight < 100:
-        msg = "Sunny"
-    elif flight < 300:
-        msg = "Cloudy"
+    if flight <= 1000:
+        msg = "!Ok"
     else:
-        msg = "Rainy"
+        msg = "OK"
     # Ausgegebenen Text in der Konsole Anzeigen
     show_message(
         device, msg, fill="white", font=proportional(CP437_FONT), scroll_delay=0.1
