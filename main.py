@@ -9,6 +9,7 @@ import board
 import busio
 import dht11
 import RPi.GPIO as GPIO
+import smbus
 from adafruit_ht16k33.segments import Seg7x4
 
 # Definiere LCD Zeilen und Spaltenanzahl.
@@ -26,6 +27,47 @@ lcd = character_lcd.Character_LCD_I2C(i2c, lcd_columns, lcd_rows, 0x21)
 segment = Seg7x4(i2c, address=0x70)
 segment.fill(0)
 
+if GPIO.RPI_REVISION == 1:
+    bus = smbus.SMBus(0)
+else:
+    bus = smbus.SMBus(1)
+
+
+class LightSensor:
+    def __init__(self):
+        # Definiere Konstante vom Datenblatt
+
+        self.DEVICE = 0x5C  # Standart I2C Geräteadresse
+
+        self.POWER_DOWN = 0x00  # Kein aktiver zustand
+        self.POWER_ON = 0x01  # Betriebsbereit
+        self.RESET = 0x07  # Reset des Data registers
+
+        # Starte Messungen ab 4 Lux.
+        self.CONTINUOUS_LOW_RES_MODE = 0x13
+        # Starte Messungen ab 1 Lux.
+        self.CONTINUOUS_HIGH_RES_MODE_1 = 0x10
+        # Starte Messungen ab 0.5 Lux.
+        self.CONTINUOUS_HIGH_RES_MODE_2 = 0x11
+        # Starte Messungen ab 1 Lux.
+        # Nach messung wird Gerät in einen inaktiven Zustand gesetzt.
+        self.ONE_TIME_HIGH_RES_MODE_1 = 0x20
+        # Starte Messungen ab 0.5 Lux.
+        # Nach messung wird Gerät in einen inaktiven Zustand gesetzt.
+        self.ONE_TIME_HIGH_RES_MODE_2 = 0x21
+        # Starte Messungen ab 4 Lux.
+        # Nach messung wird Gerät in einen inaktiven Zustand gesetzt.
+        self.ONE_TIME_LOW_RES_MODE = 0x23
+
+    def convertToNumber(self, data):
+        # Einfache Funktion um 2 Bytes Daten
+        # in eine Dezimalzahl umzuwandeln
+        return (data[1] + (256 * data[0])) / 1.2
+
+    def readLight(self):
+        data = bus.read_i2c_block_data(self.DEVICE, self.ONE_TIME_HIGH_RES_MODE_1)
+        return self.convertToNumber(data)
+
 
 def init_gpio():
     """
@@ -42,10 +84,15 @@ def get_data() -> dict:
     """
     instance = dht11.DHT11(pin=4)
     result = instance.read()
+    light_sensor = LightSensor()
     while not result.is_valid():
         result = instance.read()
 
-    return {"temp": result.temperature, "humidity": result.humidity}
+    return {
+        "temp": result.temperature,
+        "humidity": result.humidity,
+        "light": light_sensor.readLight(),
+    }
 
 
 def lcd_print(output: str, output2: str):
@@ -114,6 +161,9 @@ def main():
             lcd.backlight = False
 
             segment.fill(0)
+
+            # GPIO.cleanup()
+            return
 
 
 if __name__ == "__main__":
