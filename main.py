@@ -108,9 +108,7 @@ def get_data() -> dict:
     }
 
 
-def print_matrix(
-    light: str, cascaded: float, block_orientation: int, rotate: int
-) -> None:
+def print_matrix(light: str, cascaded, block_orientation, rotate) -> None:
     """
     Daten auf LED Panel ausgeben
     """
