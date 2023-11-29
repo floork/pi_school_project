@@ -188,6 +188,7 @@ def main():
             data = get_data()
 
             lcd_print(f"temp: {data['temp']}", f"humidity: {data['humidity']}")
+            print_matrix(data["light"])
             led_print(data)
         except KeyboardInterrupt:
             # LCD ausschalten.
