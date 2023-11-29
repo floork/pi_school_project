@@ -121,8 +121,8 @@ def main():
     while True:
         data = get_data()
 
-        led_print(data)
         lcd_print(f"temp: {data['temp']}", f"humidity: {data['humidity']}")
+        led_print(data)
 
 
 if __name__ == "__main__":
