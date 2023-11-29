@@ -109,7 +109,7 @@ def get_data() -> dict:
 
 
 def print_matrix(
-    light: str, cascaded: int, block_orientation: int, rotate: int
+    light: str, cascaded: float, block_orientation: int, rotate: int
 ) -> None:
     """
     Daten auf LED Panel ausgeben
