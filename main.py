@@ -106,7 +106,7 @@ def main():
             data = get_data()
 
             lcd_print(f"temp: {data['temp']}", f"humidity: {data['humidity']}")
-            # led_print(data)
+            led_print(data)
         except KeyboardInterrupt:
             # LCD ausschalten.
 
