@@ -127,7 +127,8 @@ def print_matrix(light: str) -> None:
     # print("[-] Matrix initialized")
 
     # Joy-IT in der Matrix anzeigen
-    msg = f"{str(light)} lux"
+    rounded = round(float(light), 2)
+    msg = f"{str(rounded)} lux"
     # Ausgegebenen Text in der Konsole Anzeigen
     print("[-] Printing: %s" % msg)
     show_message(
