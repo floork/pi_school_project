@@ -129,7 +129,6 @@ def print_matrix(light: str) -> None:
     # Joy-IT in der Matrix anzeigen
     msg = f"{str(light)} lux"
     # Ausgegebenen Text in der Konsole Anzeigen
-    print("[-] Printing: %s" % msg)
     show_message(
         device, msg, fill="white", font=proportional(CP437_FONT), scroll_delay=0.1
     )
