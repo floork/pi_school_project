@@ -54,7 +54,6 @@ def lcd_print(output: str, output2: str):
     lcd.backlight = True
 
     # Zwei Worte mit Zeilenumbruch werden ausgegeben
-    lcd.clear()
     lcd.message = output + "\n" + output2
 
     # Cursor anzeigen lassen.
