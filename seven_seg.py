@@ -1,6 +1,6 @@
-from adafruit_ht16k33.segments import Seg7x4
 import board
 import busio
+from adafruit_ht16k33.segments import Seg7x4
 
 
 class SegementLed:

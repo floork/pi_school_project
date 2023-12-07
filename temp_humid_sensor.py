@@ -1,5 +1,6 @@
-import RPi.GPIO as GPIO
 import dht11
+import RPi.GPIO as GPIO
+
 from light_sensor import LightSensor
 
 
@@ -16,12 +17,17 @@ class DHT11:
         """
         Daten aus Sensor auslesen und als dictionary zurückgeben
         """
+
+        # read data using pin 4
         instance = dht11.DHT11(pin=4)
         result = instance.read()
         light_sensor = LightSensor()
+
+        # wait for valid result
         while not result.is_valid():
             result = instance.read()
 
+        # return the dict
         return {
             "temp": result.temperature,
             "humidity": result.humidity,

@@ -1,6 +1,6 @@
 import adafruit_character_lcd.character_lcd_i2c as character_lcd
-import busio
 import board
+import busio
 
 
 class LcdScreen:

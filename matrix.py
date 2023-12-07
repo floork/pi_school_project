@@ -1,10 +1,7 @@
 from luma.core.interface.serial import noop, spi
-from luma.led_matrix.device import max7219
 from luma.core.legacy import show_message
-from luma.core.legacy.font import (
-    CP437_FONT,
-    proportional,
-)
+from luma.core.legacy.font import CP437_FONT, proportional
+from luma.led_matrix.device import max7219
 
 
 class Matrix:

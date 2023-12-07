@@ -1,11 +1,12 @@
 """
 This is the main file to read the data from the sensor and display it on the 7 segment led panel.
 """
-from temp_humid_sensor import DHT11
+import time
+
+from lcd import LcdScreen
 from matrix import Matrix
 from seven_seg import SegementLed
-from lcd import LcdScreen
-import time
+from temp_humid_sensor import DHT11
 
 
 def main():
@@ -14,14 +15,24 @@ def main():
     """
     while True:
         try:
-            data = DHT11().data()
+            # Read data from sensor
+            dht11 = DHT11()
+            data = dht11.data()
 
-            SegementLed().print(data["humidity"], "humidity")
+            # Print data on the 7 segment led panel
+            segment_led = SegementLed()
+            segment_led.print(data["humidity"], "humidity")
             time.sleep(10)
-            SegementLed().print(data["temp"], "temp")
+            segment_led.print(data["temp"], "temp")
             time.sleep(10)
-            Matrix().print(data["light"])
-            LcdScreen().print(f"temp: {data['temp']}", f"humidity: {data['humidity']}")
+
+            # Print data on the matrix
+            matrix = Matrix()
+            matrix.print(data["light"])
+
+            # Print data on the lcd screen
+            lcd = LcdScreen()
+            lcd.print(f"temp: {data['temp']}", f"humidity: {data['humidity']}")
 
         except KeyboardInterrupt:
             return
