@@ -7,32 +7,48 @@ from lcd import LcdScreen
 from matrix import Matrix
 from seven_seg import SegementLed
 from temp_humid_sensor import DHT11
+from database import Database
+import datetime
 
 
 def main():
     """
     Main Funktion des Programms
     """
+    db = Database("data.sqlite")
+    db.create_table("My Data", ["time", "temp", "humidity", "light"])
+
     while True:
         try:
             # Read data from sensor
             dht11 = DHT11()
             data = dht11.data()
 
+            humudity = data["humidity"]
+            temp = data["temp"]
+            light = data["light"]
+            time = datetime.datetime.now()
+
+            # Save data in database
+            db.insert_data(
+                "My Data",
+                {"time": time, "temp": temp, "humidity": humudity, "light": light},
+            )
+
             # Print data on the 7 segment led panel
             segment_led = SegementLed()
-            segment_led.print(data["humidity"], "humidity")
+            segment_led.print(humudity, "humidity")
             time.sleep(10)
-            segment_led.print(data["temp"], "temp")
+            segment_led.print(temp, "temp")
             time.sleep(10)
 
             # Print data on the matrix
             matrix = Matrix()
-            matrix.print(data["light"])
+            matrix.print(light)
 
             # Print data on the lcd screen
             lcd = LcdScreen()
-            lcd.print(f"temp: {data['temp']}", f"humidity: {data['humidity']}")
+            lcd.print(f"temp: {temp}", f"humidity: {humudity}")
 
         except KeyboardInterrupt:
             return
