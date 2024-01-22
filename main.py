@@ -15,8 +15,8 @@ def main():
     """
     Main Funktion des Programms
     """
-    db = Database("data.sqlite")
-    db.create_table("My Data", ["time", "temp", "humidity", "light"])
+    # db = Database("data.sqlite")
+    # db.create_table("My Data", ["time", "temp", "humidity", "light"])
 
     # Read data from sensor
     dht11 = DHT11()
