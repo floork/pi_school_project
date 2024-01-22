@@ -48,8 +48,8 @@ def main():
             time.sleep(10)
 
             # Print data on the matrix
-            matrix = Matrix()
-            matrix.print(light)
+            # matrix = Matrix()
+            # matrix.print(light)
 
             # Print data on the lcd screen
             lcd = LcdScreen()
