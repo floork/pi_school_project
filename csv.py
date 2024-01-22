@@ -9,5 +9,11 @@ class CSV:
     def __del__(self):
         self.file.close()
 
-    def write(self, data: dict):
-        csv.DictWriter(self.file, fieldnames=data.keys())
+    def write(self,  data: dict):
+        file = self.file
+        with open(file, 'w', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=data.keys()
+
+            writer.writeheader()
+            for header in data.keys():
+                writer.writerow(data[header])
