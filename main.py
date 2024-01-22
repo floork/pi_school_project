@@ -21,6 +21,8 @@ def main():
 
             # Print data on the 7 segment led panel
             segment_led = SegementLed()
+            print(type(data["humidity"]))
+
             segment_led.print(data["humidity"], "humidity")
             time.sleep(10)
             segment_led.print(data["temp"], "temp")
