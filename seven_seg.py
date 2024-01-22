@@ -24,9 +24,6 @@ class SegementLed:
         data_str = str(data)
         data_list = list(data_str)
 
-        # for convenience we print the data to the terminal
-        print(f"{data_type}: {data}")
-
         if data_type == "humidity":
             if data == 100:
                 self.segment[0] = "1"
