@@ -39,6 +39,7 @@ class SegementLed:
             self.segment[1] = "."
             self.segment[2] = "0"
             self.segment[3] = "L"
+            return
 
         # print the temperature
         self.segment[0] = data_list[0]
