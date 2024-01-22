@@ -4,6 +4,7 @@ This is the main file to read the data from the sensor and display it on the 7 s
 import csv
 import datetime
 import time
+from datetime import timezone
 
 # from database import Database
 from lcd import LcdScreen
