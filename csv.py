@@ -1,4 +1,4 @@
-import csv
+import pandas as pd
 
 
 class CSV:
@@ -6,10 +6,5 @@ class CSV:
         self.filename = filename
 
     def write(self, data: dict):
-        csvfile = open(self.filename, "a")
-        c = csv.DictWriter(csvfile, fieldnames=data.keys())
-        c.writeheader()
-
-        c.writerow(data)
-
-        csvfile.close()
+        df = pd.DataFrame(data, index=[0])
+        df.to_csv(self.filename, mode="a", header=data.keys(), index=False)
