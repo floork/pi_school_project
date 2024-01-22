@@ -18,10 +18,10 @@ def main():
     db = Database("data.sqlite")
     db.create_table("My Data", ["time", "temp", "humidity", "light"])
 
+    # Read data from sensor
+    dht11 = DHT11()
     while True:
         try:
-            # Read data from sensor
-            dht11 = DHT11()
             data = dht11.data()
 
             humudity = data["humidity"]
@@ -48,8 +48,8 @@ def main():
             time.sleep(10)
 
             # Print data on the matrix
-            # matrix = Matrix()
-            # matrix.print(light)
+            matrix = Matrix()
+            matrix.print(light)
 
             # Print data on the lcd screen
             lcd = LcdScreen()
