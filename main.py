@@ -1,14 +1,14 @@
 """
 This is the main file to read the data from the sensor and display it on the 7 segment led panel.
 """
+import datetime
 import time
 
+from database import Database
 from lcd import LcdScreen
 from matrix import Matrix
 from seven_seg import SegementLed
 from temp_humid_sensor import DHT11
-from database import Database
-import datetime
 
 
 def main():
