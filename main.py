@@ -39,7 +39,7 @@ def main():
                 "light": light,
             }
 
-            csv.writer(full_dict)
+            csv.write(full_dict)
 
             # Save data in database
             # db.insert_data(
