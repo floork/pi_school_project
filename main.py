@@ -3,6 +3,7 @@ This is the main file to read the data from the sensor and display it on the 7 s
 """
 import datetime
 import time
+from csv import CSV
 
 # from database import Database
 from lcd import LcdScreen
@@ -18,6 +19,8 @@ def main():
     # db = Database("data.sqlite")
     # db.create_table("My Data", ["time", "temp", "humidity", "light"])
 
+    csv = CSV("data.csv")
+
     # Read data from sensor
     dht11 = DHT11()
 
@@ -29,6 +32,14 @@ def main():
             temp = data["temp"]
             light = data["light"]
             # current_time = datetime.datetime.now()
+            full_dict = {
+                "time": datetime.datetime.now(),
+                "temp": temp,
+                "humidity": humudity,
+                "light": light,
+            }
+
+            csv.dict_writer(full_dict)
 
             # Save data in database
             # db.insert_data(
