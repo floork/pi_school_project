@@ -4,7 +4,7 @@ This is the main file to read the data from the sensor and display it on the 7 s
 import datetime
 import time
 
-from database import Database
+# from database import Database
 from lcd import LcdScreen
 from matrix import Matrix
 from seven_seg import SegementLed
@@ -20,6 +20,7 @@ def main():
 
     # Read data from sensor
     dht11 = DHT11()
+
     while True:
         try:
             data = dht11.data()
@@ -27,18 +28,18 @@ def main():
             humudity = data["humidity"]
             temp = data["temp"]
             light = data["light"]
-            current_time = datetime.datetime.now()
+            # current_time = datetime.datetime.now()
 
             # Save data in database
-            db.insert_data(
-                "My Data",
-                {
-                    "time": current_time,
-                    "temp": temp,
-                    "humidity": humudity,
-                    "light": light,
-                },
-            )
+            # db.insert_data(
+            #     "My Data",
+            #     {
+            #         "time": current_time,
+            #         "temp": temp,
+            #         "humidity": humudity,
+            #         "light": light,
+            #     },
+            # )
 
             # Print data on the 7 segment led panel
             segment_led = SegementLed()
