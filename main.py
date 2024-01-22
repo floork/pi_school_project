@@ -27,12 +27,17 @@ def main():
             humudity = data["humidity"]
             temp = data["temp"]
             light = data["light"]
-            time = datetime.datetime.now()
+            current_time = datetime.datetime.now()
 
             # Save data in database
             db.insert_data(
                 "My Data",
-                {"time": time, "temp": temp, "humidity": humudity, "light": light},
+                {
+                    "time": current_time,
+                    "temp": temp,
+                    "humidity": humudity,
+                    "light": light,
+                },
             )
 
             # Print data on the 7 segment led panel
