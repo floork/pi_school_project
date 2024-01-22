@@ -15,13 +15,13 @@ class SegementLed:
     def __del__(self):
         self.segment.fill(0)
 
-    def print(self, data: dict, data_type: str) -> None:
+    def print(self, data: float, data_type: str) -> None:
         """
         Daten auf LED Panel ausgeben
         """
         self.segment.fill(0)
 
-        data_str = str(data.get("temp", 0))
+        data_str = str(data)
         data_list = list(data_str)
 
         # for convenience we print the data to the terminal
