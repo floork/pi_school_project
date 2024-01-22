@@ -6,7 +6,7 @@ import datetime
 import time
 from datetime import timezone
 
-# from database import Database
+from database import Database
 from lcd import LcdScreen
 from matrix import Matrix
 from seven_seg import SegementLed
@@ -24,8 +24,8 @@ def main():
     """
     Main Funktion des Programms
     """
-    # db = Database("data.sqlite")
-    # db.create_table("My Data", ["time", "temp", "humidity", "light"])
+    db = Database("data.sqlite")
+    db.create_table("My Data", ["time", "temp", "humidity", "light"])
 
     # Read data from sensor
     dht11 = DHT11()
@@ -51,15 +51,10 @@ def main():
             csv_writer(full_dict, "data.csv")
 
             # Save data in database
-            # db.insert_data(
-            #     "My Data",
-            #     {
-            #         "time": current_time,
-            #         "temp": temp,
-            #         "humidity": humudity,
-            #         "light": light,
-            #     },
-            # )
+            db.insert_data(
+                "My Data",
+                full_dict,
+            )
 
             # Print data on the 7 segment led panel
             segment_led = SegementLed()
