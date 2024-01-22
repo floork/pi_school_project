@@ -4,6 +4,7 @@ This is the main file to read the data from the sensor and display it on the 7 s
 import csv
 import datetime
 import time
+from datetime import timezone
 
 # from database import Database
 from lcd import LcdScreen
@@ -15,7 +16,8 @@ from temp_humid_sensor import DHT11
 def csv_writer(data, path):
     csv_file = open(path, "a", newline="")
     writer = csv.DictWriter(csv_file, fieldnames=data.keys())
-    writer.writerow(data)
+    for key, value in data.items():
+        writer.writerow({key: value})
     csv_file.close()
 
 
@@ -36,9 +38,12 @@ def main():
             humudity = data["humidity"]
             temp = data["temp"]
             light = data["light"]
-            # current_time = datetime.datetime.now()
+            dt = datetime.datetime.now(timezone.utc)
+
+            utc_time = dt.replace(tzinfo=timezone.utc)
+            utc_timestamp = utc_time.timestamp()
             full_dict = {
-                "time": datetime.datetime.now(),
+                "time": utc_timestamp,
                 "temp": temp,
                 "humidity": humudity,
                 "light": light,
