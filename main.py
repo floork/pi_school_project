@@ -1,9 +1,9 @@
 """
 This is the main file to read the data from the sensor and display it on the 7 segment led panel.
 """
+import csv
 import datetime
 import time
-from csv import CSV
 
 # from database import Database
 from lcd import LcdScreen
@@ -12,14 +12,19 @@ from seven_seg import SegementLed
 from temp_humid_sensor import DHT11
 
 
+def csv_writer(data, path):
+    csv_file = open(path, "a", newline="")
+    writer = csv.DictWriter(csv_file, fieldnames=data.keys())
+    writer.writerow(data)
+    csv_file.close()
+
+
 def main():
     """
     Main Funktion des Programms
     """
     # db = Database("data.sqlite")
     # db.create_table("My Data", ["time", "temp", "humidity", "light"])
-
-    csv = CSV("data.csv")
 
     # Read data from sensor
     dht11 = DHT11()
@@ -39,7 +44,7 @@ def main():
                 "light": light,
             }
 
-            csv.write(full_dict)
+            csv_writer(full_dict, "data.csv")
 
             # Save data in database
             # db.insert_data(
