@@ -1,3 +1,5 @@
+import time
+
 from luma.core import legacy
 from luma.core.interface.serial import noop, spi
 from luma.core.render import canvas
@@ -42,23 +44,23 @@ class Matrix:
         """
         Daten auf LED Panel ausgeben
         """
-
-        cascaded = 1
-        block_orientation = 90
-        rotate = 0
-        # Matrix Gerät festlegen und erstellen.
-        serial = spi(port=0, device=1, gpio=noop())
-        device = max7219(
-            serial,
-            cascaded=cascaded or 1,
-            block_orientation=block_orientation,
-            rotate=rotate or 0,
-        )
-
-        # Joy-IT in der Matrix anzeigen
         flight = float(light)
+        hour = time.strftime("%H")
 
-        if flight <= 3500:
+        # differenzieren zwischen Tag und Nacht
+        if hour >= "06" and hour <= "20":
+            if flight <= 30000:
+                self.arrow_down()
+                return
+
+            if flight >= 80000:
+                self.arrow_up()
+                return
+
+            self.ok()
+            return
+
+        if flight <= 35000:
             self.arrow_down()
             return
 
