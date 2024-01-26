@@ -60,8 +60,6 @@ class Matrix:
         # Joy-IT in der Matrix anzeigen
         flight = float(light)
 
-        print(f"[-] Flight: {flight}")
-
         if flight <= 600:
             self.arrow_down()
             return
