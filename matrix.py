@@ -62,6 +62,7 @@ class Matrix:
 
         if flight <= 300:
             self.arrow_down()
+            print(f"[-] Flight: {flight}")
             return
 
         if flight <= 85000:
