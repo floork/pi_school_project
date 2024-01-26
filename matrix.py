@@ -14,7 +14,7 @@ class Matrix:
     def arrow_up(self) -> None:
         data = [[0x00, 0x04, 0x06, 0xFF, 0xFF, 0x06, 0x04, 0x00]]
         serial = spi(port=0, device=1, gpio=noop())
-        device = max7219(serial, rotate=1)
+        device = max7219(serial, rotate=3)
 
         with canvas(device) as draw:
             # Note that "\0" is the zero-th character in the font (i.e the only one)
@@ -62,12 +62,10 @@ class Matrix:
 
         if flight <= 300:
             self.arrow_down()
-            print(f"[-] Flight: {flight}")
             return
 
-        if flight <= 85000:
+        if flight >= 85000:
             self.arrow_up()
-            print(f"[-] Flight: {flight}")
             return
 
         self.ok()
