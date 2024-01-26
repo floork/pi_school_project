@@ -67,4 +67,5 @@ class Matrix:
             self.arrow_up()
             return
 
+        print("test")
         self.ok()
