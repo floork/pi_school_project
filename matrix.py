@@ -32,7 +32,7 @@ class Matrix:
     def ok(self) -> None:
         data = [[0x30, 0x60, 0xC0, 0x60, 0x30, 0x18, 0x0C, 0x06]]
         serial = spi(port=0, device=1, gpio=noop())
-        device = max7219(serial, rotate=1)
+        device = max7219(serial, rotate=3)
 
         with canvas(device) as draw:
             # Note that "\0" is the zero-th character in the font (i.e the only one)
