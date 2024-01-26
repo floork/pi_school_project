@@ -56,13 +56,6 @@ def main():
                 full_dict,
             )
 
-            # Print data on the 7 segment led panel
-            segment_led = SegementLed()
-            segment_led.print(humudity, "humidity")
-            time.sleep(10)
-            segment_led.print(temp, "temp")
-            time.sleep(10)
-
             # Print data on the matrix
             matrix = Matrix()
             matrix.print(light)
@@ -70,6 +63,13 @@ def main():
             # Print data on the lcd screen
             lcd = LcdScreen()
             lcd.print(f"temp: {temp}", f"humidity: {humudity}")
+
+            # Print data on the 7 segment led panel
+            segment_led = SegementLed()
+            segment_led.print(humudity, "humidity")
+            time.sleep(10)
+            segment_led.print(temp, "temp")
+            time.sleep(10)
 
         except KeyboardInterrupt:
             return
