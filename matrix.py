@@ -1,7 +1,5 @@
 from luma.core import legacy
 from luma.core.interface.serial import noop, spi
-from luma.core.legacy import show_message
-from luma.core.legacy.font import CP437_FONT, proportional
 from luma.core.render import canvas
 from luma.led_matrix.device import max7219
 
@@ -15,7 +13,7 @@ class Matrix:
 
     def arrow_up(self) -> None:
         data = [[0x00, 0x04, 0x06, 0xFF, 0xFF, 0x06, 0x04, 0x00]]
-        serial = spi(port=0, device=0, gpio=noop())
+        serial = spi(port=0, device=1, gpio=noop())
         device = max7219(serial)
 
         with canvas(device) as draw:
@@ -24,7 +22,7 @@ class Matrix:
 
     def arrow_down(self) -> None:
         data = [[0x00, 0x04, 0x06, 0xFF, 0xFF, 0x06, 0x04, 0x00]]
-        serial = spi(port=0, device=0, gpio=noop())
+        serial = spi(port=0, device=1, gpio=noop())
         device = max7219(serial)
 
         with canvas(device) as draw:
@@ -33,7 +31,7 @@ class Matrix:
 
     def ok(self) -> None:
         data = [[0x00, 0x04, 0x06, 0xFF, 0xFF, 0x06, 0x04, 0x00]]
-        serial = spi(port=0, device=0, gpio=noop())
+        serial = spi(port=0, device=1, gpio=noop())
         device = max7219(serial)
 
         with canvas(device) as draw:
