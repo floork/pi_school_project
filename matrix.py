@@ -30,7 +30,7 @@ class Matrix:
             legacy.text(draw, (0, 0), "\0", fill="white", font=data)
 
     def ok(self) -> None:
-        data = [[0x00, 0x04, 0x06, 0xFF, 0xFF, 0x06, 0x04, 0x00]]
+        data = [[0x30, 0x60, 0xC0, 0x60, 0x30, 0x18, 0x0C, 0x06]]
         serial = spi(port=0, device=1, gpio=noop())
         device = max7219(serial, rotate=1)
 
