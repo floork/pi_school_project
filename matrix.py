@@ -45,20 +45,6 @@ class Matrix:
         Daten auf LED Panel ausgeben
         """
         flight = float(light)
-        hour = time.strftime("%H")
-
-        # differenzieren zwischen Tag und Nacht
-        if hour >= "06" and hour <= "20":
-            if flight <= 30000:
-                self.arrow_down()
-                return
-
-            if flight >= 80000:
-                self.arrow_up()
-                return
-
-            self.ok()
-            return
 
         if flight <= 35000:
             self.arrow_down()
