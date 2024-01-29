@@ -24,9 +24,6 @@ class SegementLed:
         data_str = str(data)
         data_list = list(data_str)
 
-        # for convenience we print the data to the terminal
-        print(data)
-
         if data_type == "humidity":
             print("humidity ", data)
             if data == 100:
@@ -40,6 +37,7 @@ class SegementLed:
             self.segment[1] = "."
             self.segment[2] = "0"
             self.segment[3] = "L"
+            return
 
         # print the temperature
         self.segment[0] = data_list[0]
