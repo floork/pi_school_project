@@ -25,7 +25,6 @@ class SegementLed:
         data_list = list(data_str)
 
         if data_type == "humidity":
-            print("humidity ", data)
             if data == 100:
                 self.segment[0] = "1"
                 self.segment[1] = "0"
