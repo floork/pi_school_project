@@ -60,11 +60,11 @@ class Matrix:
             self.ok()
             return
 
-        if flight <= 35000:
+        if flight <= 35_000:
             self.arrow_down()
             return
 
-        if flight >= 85000:
+        if flight > 60_000:
             self.arrow_up()
             return
 
