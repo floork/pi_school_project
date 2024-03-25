@@ -6,8 +6,10 @@ class Relay:
         self.relay_pin = 40
         try:
             GPIO.setmode(GPIO.BOARD)
-        except:
+        except ValueError:
             GPIO.setmode(GPIO.BCM)
+        except RuntimeError:
+            GPIO.setmode(GPIO.BOARD)
         GPIO.setup(self.relay_pin, GPIO.OUT)
 
     def __del__(self):
