@@ -5,9 +5,12 @@ from luma.core.interface.serial import noop, spi
 from luma.core.render import canvas
 from luma.led_matrix.device import max7219
 
+from relay import Relay
+
 
 class Matrix:
     def __init__(self):
+        self.relay = Relay()
         pass
 
     def __del__(self):
@@ -48,10 +51,12 @@ class Matrix:
 
         if flight <= 35_000:
             self.arrow_down()
+            self.relay.open()
             return
 
         if flight > 60_000:
             self.arrow_up()
+            self.relay.close()
             return
 
         self.ok()
