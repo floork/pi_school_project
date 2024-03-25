@@ -11,7 +11,17 @@ class Relay:
         GPIO.cleanup()
 
     def open(self):
+        try:
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(self.relay_pin, GPIO.OUT)
+        except:
+            pass
         GPIO.output(self.relay_pin, GPIO.LOW)
 
     def close(self):
+        try:
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(self.relay_pin, GPIO.OUT)
+        except:
+            pass
         GPIO.output(self.relay_pin, GPIO.HIGH)
