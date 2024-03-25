@@ -1,21 +1,19 @@
 import time
 
-import RPi.GPIO as GPIO
 from luma.core import legacy
 from luma.core.interface.serial import noop, spi
 from luma.core.render import canvas
 from luma.led_matrix.device import max7219
 
+from relay import Relay
+
 
 class Matrix:
     def __init__(self):
-        self.relay_pin = 40
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(self.relay_pin, GPIO.OUT)
+        self.relay = Relay()
         pass
 
     def __del__(self):
-        GPIO.cleanup()
         pass
 
     def arrow_up(self) -> None:
@@ -53,12 +51,12 @@ class Matrix:
 
         if flight <= 35_000:
             self.arrow_down()
-            GPIO.output(self.relay_pin, GPIO.LOW)
+            self.relay.open()
             return
 
         if flight > 60_000:
             self.arrow_up()
-            GPIO.output(self.relay_pin, GPIO.HIGH)
+            self.relay.close()
             return
 
         self.ok()
