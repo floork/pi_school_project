@@ -11,6 +11,7 @@ class Relay:
         GPIO.cleanup()
 
     def open(self):
+        print("open")
         try:
             GPIO.setmode(GPIO.BCM)
             GPIO.setup(self.relay_pin, GPIO.OUT)
@@ -19,6 +20,7 @@ class Relay:
             pass
 
     def close(self):
+        print("open")
         try:
             GPIO.setmode(GPIO.BCM)
             GPIO.setup(self.relay_pin, GPIO.OUT)
