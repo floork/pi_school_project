@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 
 class Relay:
     def __init__(self):
-        self.relay_pin = 40
+        self.relay_pin = 21
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.relay_pin, GPIO.OUT)
 
