@@ -54,6 +54,10 @@ def main():
             print(f"[DEBUG]: temp -> {temp}")
             print(f"[DEBUG]: humudity -> {humudity}")
             print(f"[DEBUG]: light -> {light}")
+            lenght = len(str(utc_timestamp)) + 20
+            for _ in range(lenght):
+                print("=", end="")
+            print()
 
             csv_writer(full_dict, "data.csv")
 
