@@ -12,6 +12,7 @@ class Relay:
         GPIO.cleanup()
 
     def open(self):
+        print(self.state)
         if self.state is not None and self.state == "LOW":
             return
 
@@ -24,6 +25,7 @@ class Relay:
             pass
 
     def close(self):
+        print(self.state)
         if self.state is not None and self.state == "HIGH":
             return
         try:
