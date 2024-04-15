@@ -50,6 +50,11 @@ def main():
                 "light": light,
             }
 
+            print(f"[DEBUG]: time -> {utc_timestamp}")
+            print(f"[DEBUG]: temp -> {temp}")
+            print(f"[DEBUG]: humudity -> {humudity}")
+            print(f"[DEBUG]: light -> {light}")
+
             csv_writer(full_dict, "data.csv")
 
             # Save data in database
