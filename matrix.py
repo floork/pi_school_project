@@ -64,12 +64,13 @@ class Matrix:
             self.relay.close()  # Turn off the lights
             return
 
-        if flight <= 35_000:
+        # if flight <= 35_000:
+        if flight <= 1000:
             self.arrow_down()
             self.relay.open()  # Turn on the lights
             return
 
-        if flight > 60_000:
+        if flight > 1000:
             self.arrow_up()
             self.relay.close()  # Turn off the lights
             return
