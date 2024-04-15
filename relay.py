@@ -21,7 +21,6 @@ class Relay:
             GPIO.setup(self.relay_pin, GPIO.OUT)
             GPIO.output(self.relay_pin, GPIO.LOW)
             self.state = "LOW"
-            print(self.state)
         except:
             pass
 
@@ -34,6 +33,5 @@ class Relay:
             GPIO.setup(self.relay_pin, GPIO.OUT)
             GPIO.output(self.relay_pin, GPIO.HIGH)
             self.state = "HIGH"
-            print(self.state)
         except:
             pass
