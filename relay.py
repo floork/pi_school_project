@@ -12,7 +12,7 @@ class Relay:
         GPIO.cleanup()
 
     def open(self):
-        if self.state is not None and self.state != "LOW":
+        if self.state is not None and self.state == "LOW":
             return
 
         try:
@@ -24,7 +24,7 @@ class Relay:
             pass
 
     def close(self):
-        if self.state is not None and self.state != "HIGH":
+        if self.state is not None and self.state == "HIGH":
             return
         try:
             GPIO.setmode(GPIO.BCM)
