@@ -31,6 +31,7 @@ def main():
 
     # Read data from sensor
     dht11 = DHT11()
+    matrix = Matrix()
 
     while True:
         try:
@@ -67,7 +68,6 @@ def main():
                 full_dict,
             )
             # Print data on the matrix
-            matrix = Matrix()
             matrix.print(light)
 
             # Print data on the lcd screen
