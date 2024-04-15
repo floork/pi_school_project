@@ -14,6 +14,7 @@ class Relay:
         try:
             GPIO.setmode(GPIO.BCM)
             GPIO.setup(self.relay_pin, GPIO.OUT)
+            GPIO.output(self.relay_pin, GPIO.LOW)
         except:
             pass
         GPIO.output(self.relay_pin, GPIO.LOW)
@@ -22,6 +23,7 @@ class Relay:
         try:
             GPIO.setmode(GPIO.BCM)
             GPIO.setup(self.relay_pin, GPIO.OUT)
+            GPIO.output(self.relay_pin, GPIO.HIGH)
         except:
             pass
         GPIO.output(self.relay_pin, GPIO.HIGH)
