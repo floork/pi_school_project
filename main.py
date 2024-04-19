@@ -77,9 +77,9 @@ def main():
             # Print data on the 7 segment led panel
             segment_led = SegementLed()
             segment_led.print(humudity, "humidity")
-            # time.sleep(10)
+            time.sleep(10)
             segment_led.print(temp, "temp")
-            # time.sleep(10)
+            time.sleep(10)
 
         except KeyboardInterrupt:
             return
