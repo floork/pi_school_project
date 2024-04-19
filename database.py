@@ -39,7 +39,7 @@ class Database:
         Insert data into the database.
         """
         try:
-            keys_to_check = ["time", "temp in °C", "humidity", "light"]
+            keys_to_check = ["time", "temp", "humidity", "light"]
             for key in keys_to_check:
                 if data.get(key) is None:
                     data[key] = None
