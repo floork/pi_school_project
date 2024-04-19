@@ -27,7 +27,7 @@ def main():
     """
 
     db = Database("database.db")
-    db.create_table("My Data", ["time", "temp in °C", "humidity", "light"])
+    db.create_table("My Data", ["time", "temp", "humidity", "light"])
 
     # Read data from sensor
     dht11 = DHT11()
